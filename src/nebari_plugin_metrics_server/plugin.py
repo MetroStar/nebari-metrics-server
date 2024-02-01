@@ -1,5 +1,4 @@
 from typing import Any, Dict, List, Optional, Union
-import os
 
 from nebari.schema import Base
 from _nebari.stages.base import NebariTerraformStage
