@@ -1,8 +1,7 @@
 locals {
-  name             = var.name
-  create_namespace = var.create_namespace
-  namespace        = var.namespace
-  overrides        = var.overrides
+  name      = var.name
+  namespace = var.namespace
+  overrides = var.overrides
 
   affinity = var.affinity != null && lookup(var.affinity, "enabled", false) ? {
     enabled = true
@@ -17,20 +16,12 @@ locals {
     selector = null
   }
 
-  chart_namespace = local.create_namespace ? kubernetes_namespace.this[0].metadata[0].name : local.namespace
-}
-
-resource "kubernetes_namespace" "this" {
-  count = local.create_namespace ? 1 : 0
-
-  metadata {
-    name = local.namespace
-  }
 }
 
 resource "helm_release" "metrics_server" {
-  name      = local.name
-  namespace = local.chart_namespace
+  name             = local.name
+  create_namespace = true
+  namespace        = local.namespace
 
   repository = "https://kubernetes-sigs.github.io/metrics-server/"
   chart      = "metrics-server"

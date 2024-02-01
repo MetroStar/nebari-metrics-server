@@ -15,7 +15,7 @@ class MetricsServerAffinityConfig(Base):
 
 class MetricsServerConfig(Base):
     name: Optional[str] = "metrics-server"
-    namespace: Optional[str] = None
+    namespace: Optional[str] = "kube-system"
     affinity: MetricsServerAffinityConfig = MetricsServerAffinityConfig()
     values: Optional[Dict[str, Any]] = {}
 
@@ -32,14 +32,11 @@ class MetricsServerStage(NebariTerraformStage):
 
     def input_vars(self, stage_outputs: Dict[str, Dict[str, Any]]):
         chart_ns = self.config.metrics_server.namespace
-        create_ns = True
         if chart_ns == None or chart_ns == "" or chart_ns == self.config.namespace:
             chart_ns = self.config.namespace
-            create_ns = False
 
         return {
             "name": self.config.metrics_server.name,
-            "create_namespace": create_ns,
             "namespace": chart_ns,
             "affinity": {
                 "enabled": self.config.metrics_server.affinity.enabled,

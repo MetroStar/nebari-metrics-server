@@ -2,10 +2,6 @@ variable "name" {
   type = string
 }
 
-variable "create_namespace" {
-  type = bool
-}
-
 variable "namespace" {
   type = string
 }
