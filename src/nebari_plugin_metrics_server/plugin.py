@@ -42,10 +42,10 @@ class MetricsServerStage(NebariTerraformStage):
             "create_namespace": create_ns,
             "namespace": chart_ns,
             "affinity": {
-                "enabled": self.config.cert_manager.affinity.enabled,
-                "selector": self.config.cert_manager.affinity.selector.__dict__
-                if isinstance(self.config.cert_manager.affinity.selector, MetricsServerAffinityConfig)
-                else self.config.cert_manager.affinity.selector,
+                "enabled": self.config.metrics_server.affinity.enabled,
+                "selector": self.config.metrics_server.affinity.selector.__dict__
+                if isinstance(self.config.metrics_server.affinity.selector, MetricsServerAffinityConfig)
+                else self.config.metrics_server.affinity.selector,
             },
             "overrides": self.config.metrics_server.values,
         }
