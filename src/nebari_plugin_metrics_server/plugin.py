@@ -15,7 +15,7 @@ class MetricsServerAffinityConfig(Base):
 
 class MetricsServerConfig(Base):
     name: Optional[str] = "metrics-server"
-    namespace: Optional[str] = None
+    namespace: Optional[str] = "kube-system"
     affinity: MetricsServerAffinityConfig = MetricsServerAffinityConfig()
     values: Optional[Dict[str, Any]] = {}
 
