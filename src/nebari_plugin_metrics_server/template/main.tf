@@ -38,7 +38,6 @@ resource "helm_release" "metrics_server" {
 
   values = [
     yamlencode({
-      installCRDs = true
       affinity = local.affinity.enabled ? {
         nodeAffinity = {
           requiredDuringSchedulingIgnoredDuringExecution = {
